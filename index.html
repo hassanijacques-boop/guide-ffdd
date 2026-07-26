@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faisant Fonction Directeur d'École — Guide Complet</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2c5f8a;
+    --secondary: #e8b830;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --text-light: #555;
+    --border: #dde1e7;
+    --success: #27ae60;
+    --info: #2980b9;
+    --warning: #f39c12;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: #fff;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--secondary);
+  }
+  .hero h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0.5rem auto 0;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: var(--secondary);
+    color: var(--primary);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  /* LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  /* SIDEBAR NAV */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+  .sidebar {
+    position: sticky;
+    top: 1rem;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+  .sidebar h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    margin-bottom: 0.8rem;
+  }
+  .sidebar nav a {
+    display: block;
+    padding: 0.4rem 0.5rem;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+  .sidebar nav a:hover,
+  .sidebar nav a.active {
+    background: #eef4fb;
+    border-left-color: var(--primary);
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .sidebar nav a.sub {
+    padding-left: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--text-light);
+  }
+  /* MAIN CONTENT */
+  .content { min-width: 0; }
+  section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--primary);
+  }
+  .section-header .icon {
+    width: 40px; height: 40px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin: 1.5rem 0 0.75rem;
+  }
+  h3:first-child { margin-top: 0; }
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 1rem 0 0.5rem;
+  }
+  p { margin-bottom: 1rem; }
+  ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+  li { margin-bottom: 0.3rem; }
+  /* REF CARDS */
+  .ref-card {
+    background: #f8faff;
+    border: 1px solid #d0dce8;
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin: 1rem 0;
+    transition: box-shadow 0.2s;
+  }
+  .ref-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .ref-card .ref-title {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1rem;
+  }
+  .ref-card .ref-meta {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin: 0.2rem 0 0.5rem;
+  }
+  .ref-card .ref-desc { font-size: 0.92rem; }
+  .ref-card .ref-link {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--info);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .ref-card .ref-link:hover { text-decoration: underline; }
+  .tag {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .tag-bo { background: #e8f0fe; color: #1a5bb5; }
+  .tag-loi { background: #fce8e8; color: #b51a1a; }
+  .tag-guide { background: #e8fce8; color: #1a8a1a; }
+  .tag-outil { background: #fef3e0; color: #b57a1a; }
+  .tag-syndicat { background: #f0e8fc; color: #6a1ab5; }
+  /* CALL OUT */
+  .callout {
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin: 1.2rem 0;
+    border-left: 5px solid;
+  }
+  .callout.info {
+    background: #eef4fb;
+    border-color: var(--info);
+  }
+  .callout.warning {
+    background: #fef9e7;
+    border-color: var(--warning);
+  }
+  .callout.success {
+    background: #eafaf1;
+    border-color: var(--success);
+  }
+  .callout strong:first-child {
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+  }
+  /* CHECKLIST */
+  .checklist { list-style: none; margin-left: 0; }
+  .checklist li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+  }
+  .checklist li::before {
+    content: '☐';
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    color: var(--primary);
+  }
+  .checklist li.done::before { content: '☑'; color: var(--success); }
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.7rem; top: 0.5rem;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--primary);
+    border: 2px solid #fff;
+  }
+  .timeline-item .date {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 600;
+  }
+  .timeline-item .title {
+    font-weight: 700;
+    color: var(--primary);
+  }
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+  }
+  th {
+    background: var(--primary);
+    color: #fff;
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    font-weight: 600;
+  }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child { border-radius: 0 8px 0 0; }
+  td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:nth-child(even) td { background: #f8faff; }
+  /* MISE EN PAGE (PRO) */
+  .pro-section {
+    background: #fff8e6;
+    border: 1px solid #f0dca0;
+    border-radius: 10px;
+    padding: 1.2rem;
+    margin: 1rem 0;
+  }
+  .pro-section h4 { color: #8a6a0a; }
+  /* ACCORDION */
+  details {
+    background: #f8faff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    overflow: hidden;
+  }
+  details summary {
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--primary);
+    user-select: none;
+  }
+  details summary:hover { background: #eef4fb; }
+  details[open] summary { border-bottom: 1px solid var(--border); }
+  details .detail-body { padding: 1rem; }
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+  /* PRINT */
+  @media print {
+    .sidebar { display: none; }
+    .layout { display: block; }
+    section { break-inside: avoid; }
+    .hero { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">📋 Guide de Préparation</div>
+  <h1>Faisant Fonction de Directeur d'École</h1>
+  <p>Tous les textes officiels, circulaires, référentiels et ressources pour être prêt à l'éventualité d'une nomination en tant que FFDD</p>
+</div>
+
+<div class="container">
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <h3>📑 Sommaire</h3>
+      <nav>
+        <a href="#intro">Introduction</a>
+        <a href="#statut" class="sub">Qu'est-ce qu'un FFDD ?</a>
+        <a href="#textes">Textes Officiels</a>
+        <a href="#referentiel" class="sub">Référentiel Métier</a>
+        <a href="#missions" class="sub">Missions & Attributions</a>
+        <a href="#guide">Guide du Directeur d'École</a>
+        <a href="#competences">Compétences Clés</a>
+        <a href="#indemnites">Indemnités & Régime</a>
+        <a href="#circulaires">Circulaires de Rentrée</a>
+        <a href="#syndicats">Ressources Syndicales</a>
+        <a href="#preparation">Checklist de Préparation</a>
+        <a href="#academie">Spécificités Académiques</a>
+        <a href="#liens">Liens Utiles</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="content">
+
+      <!-- INTRO -->
+      <section id="intro">
+        <div class="section-header">
+          <div class="icon">🏫</div>
+          <h2>Introduction</h2>
+        </div>
+        <p>Devenir <strong>faisant fonction de directeur d'école (FFDD)</strong> est une éventualité qui peut survenir à tout moment dans la carrière d'un professeur des écoles : absence longue durée, poste vacant, création de poste en cours d'année, ou situation exceptionnelle.</p>
+        <p>Ce guide rassemble <strong>tous les textes officiels, circulaires, référentiels et ressources</strong> à connaître pour être prêt le jour où l'inspecteur vous appellera. Il est structuré pour une lecture progressive ou une consultation ponctuelle.</p>
+        <div class="callout info">
+          <strong>🎯 Objectif</strong>
+          Vous devez connaître : le statut, le référentiel métier, les missions, les responsabilités juridiques, les procédures administratives, et savoir où trouver l'information quand vous en aurez besoin.
+        </div>
+      </section>
+
+      <!-- STATUT -->
+      <section id="statut">
+        <div class="section-header">
+          <div class="icon">⚖️</div>
+          <h2>Qu'est-ce qu'un Faisant Fonction de Directeur d'École ?</h2>
+        </div>
+
+        <h3>Définition</h3>
+        <p>Le <strong>faisant fonction de directeur d'école</strong> (FFDD, parfois FFDE) est un professeur des écoles nommé temporairement pour assurer les fonctions de direction d'une école, sans être titulaire du statut de directeur d'école (réforme 2019). Il exerce <strong>les mêmes missions et responsabilités</strong> qu'un directeur titulaire, mais dans le cadre d'une <strong>intérim ou d'une nomination provisoire</strong>.</p>
+
+        <h3>Dans quels cas devient-on FFDD ?</h3>
+        <ul>
+          <li><strong>Absence longue durée</strong> du directeur titulaire (congé maladie, maternité, disponibilité)</li>
+          <li><strong>Poste vacant</strong> non pourvu à la rentrée</li>
+          <li><strong>Création de poste</strong> en cours d'année</li>
+          <li><strong>Décharge partielle</strong> nécessitant un adjoint suppléant</li>
+          <li><strong>Situation exceptionnelle</strong> (retard de nomination, mutation de dernière minute)</li>
+        </ul>
+
+        <h3>Statut juridique</h3>
+        <p>Depuis la <strong>réforme de 2019</strong> (décret n° 2019-826), le directeur d'école est nommé pour <strong>5 ans renouvelables</strong>, avec un statut distinct de celui des professeurs. Le FFDD n'est <strong>pas soumis au même processus de sélection</strong> mais exerce les mêmes prérogatives pendant la durée de son intérim.</p>
+
+        <div class="callout warning">
+          <strong>⚠️ Point clé</strong>
+          Le FFDD assume <strong>toutes les responsabilités</strong> du directeur titulaire : responsabilité pénale, responsabilité administrative, responsabilité pédagogique. Il n'y a pas de régime allégé pour un faisant fonction.
+        </div>
+
+        <h3>Durée et fin de la mission</h3>
+        <ul>
+          <li>La durée varie : de quelques semaines à une année scolaire complète</li>
+          <li>La mission prend fin au <strong>retour du titulaire</strong> ou à la <strong>nomination d'un nouveau directeur</strong></li>
+          <li>Le FFDD perçoit l'<strong>indemnité de direction</strong> (proportionnelle à la taille de l'école) pendant son exercice</li>
+        </ul>
+      </section>
+
+      <!-- TEXTES OFFICIELS -->
+      <section id="textes">
+        <div class="section-header">
+          <div class="icon">📜</div>
+          <h2>Textes Officiels — Le Socle Juridique</h2>
+        </div>
+        <p>Voici la liste exhaustive des textes qu'il faut connaître, classés par ordre de priorité de lecture.</p>
+
+        <h3>🔴 Priorité 1 — Textes Fondamentaux (à lire impérativement)</h3>
+
+        <div class="ref-card">
+          <div class="ref-title">1. Référentiel métier du directeur d'école</div>
+          <div class="ref-meta"><span class="tag tag-bo">BO n°3 — 17 janvier 2019</span> <span class="tag tag-guide">Référentiel</span></div>
+          <div class="ref-desc">Texte fondateur qui définit les 4 axes du métier : piloter l'école, animer l'équipe pédagogique, gérer l'école, représenter l'institution. Structure toutes les missions.</div>
+          <a class="ref-link" href="https://www.education.gouv.fr/bo/19/Hebdo3/MENE1900766C.htm" target="_blank">🔗 Voir sur education.gouv.fr →</a>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">2. Décret n° 2019-826 du 1er août 2019</div>
+          <div class="ref-meta"><span class="tag tag-loi">JORF n°0179</span> <span class="tag tag-bo">Décret</span></div>
+          <div class="ref-desc">Crée le nouveau statut des directeurs d'école : nomination pour 5 ans, conditions d'exercice, régime indemnitaire. Modifie le Code de l'éducation (articles D. 411-1 à D. 411-7).</div>
+          <a class="ref-link" href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000038795020/" target="_blank">🔗 Voir sur Légifrance →</a>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">3. Arrêté du 1er août 2019</div>
+          <div class="ref-meta"><span class="tag tag-bo">Arrêté</span></div>
+          <div class="ref-desc">Porte organisation des missions des directeurs d'école et fixe le cadre d'emploi du temps et les décharges de service.</div>
+          <a class="ref-link" href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000038795168/" target="_blank">🔗 Voir sur Légifrance →</a>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">4. Circulaire n° 2019-122 du 4 septembre 2019</div>
+          <div class="ref-meta"><span class="tag tag-bo">BOEN — Circulaire</span></div>
+          <div class="ref-desc">Mise en œuvre du nouveau statut. Précise les modalités de la réforme, les décharges, les critères de sélection, et le cadre des faisant fonction.</div>
+          <a class="ref-link" href="https://www.education.gouv.fr/pid285/bulletin_officiel.html?cid_bo=146652" target="_blank">🔗 Voir sur education.gouv.fr →</a>
+        </div>
+
+        <h3>🟠 Priorité 2 — Textes d'Application</h3>
+
+        <div class="ref-card">
+          <div class="ref-title">5. Code de l'éducation — Articles D. 411-1 à D. 411-7</div>
+          <div class="ref-meta"><span class="tag tag-loi">Code de l'éducation</span></div>
+          <div class="ref-desc">Base législative : nomination, missions, responsabilités, organisation des écoles maternelles et élémentaires.</div>
+          <a class="ref-link" href="https://www.legifrance.gouv.fr/codes/id/LEGISCTA000033139818/" target="_blank">🔗 Voir sur Légifrance →</a>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">6. Décret n° 2020-1297 du 23 octobre 2020</div>
+          <div class="ref-meta"><span class="tag tag-loi">Décret</span></div>
+          <div class="ref-desc">Modifie les modalités de nomination des directeurs d'école et les conditions d'exercice des fonctions de direction.</div>
+          <a class="ref-link" href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000042416110" target="_blank">🔗 Voir sur Légifrance →</a>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">7. Décret n° 2022-1468 du 24 novembre 2022</div>
+          <div class="ref-meta"><span class="tag tag-loi">Décret</span></div>
+          <div class="ref-desc">Porte revalorisation des directeurs d'école et adaptation des décharges d'enseignement.</div>
+          <a class="ref-link" href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000046641573" target="_blank">🔗 Voir sur Légifrance →</a>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">8. Circulaire n° 2023-069 du 24 mai 2023</div>
+          <div class="ref-meta"><span class="tag tag-bo">BOEN — Circulaire</span></div>
+          <div class="ref-desc">Modalités de mise en œuvre de la revalorisation des directeurs d'école et nouvelles grilles de décharge.</div>
+          <a class="ref-link" href="https://www.education.gouv.fr/bo/2023/Hebdo22/MENE2314321C" target="_blank">🔗 Voir sur education.gouv.fr →</a>
+        </div>
+
+        <h3>🟢 Priorité 3 — Pour Aller Plus Loin</h3>
+
+        <div class="ref-card">
+          <div class="ref-title">9. Décret n° 89-469 du 11 juillet 1989</div>
+          <div class="ref-meta"><span class="tag tag-loi">Décret historique</span></div>
+          <div class="ref-desc">Texte fondateur historique sur les missions des directeurs d'école (partiellement abrogé par la réforme 2019 mais encore cité pour certains aspects).</div>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">10. Loi n° 2019-791 du 26 juillet 2019</div>
+          <div class="ref-meta"><span class="tag tag-loi">Loi</span></div>
+          <div class="ref-desc">Loi pour une école de la confiance. Dans son volet sur la direction d'école, elle donne le cadre législatif de la réforme.</div>
+          <a class="ref-link" href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000038829377/" target="_blank">🔗 Voir sur Légifrance →</a>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">11. Code de l'éducation — Article L. 411-1</div>
+          <div class="ref-meta"><span class="tag tag-loi">Code de l'éducation</span></div>
+          <div class="ref-desc">Définit le rôle du directeur d'école : « Le directeur d'école est chargé de l'organisation de l'école, de la répartition des moyens d'enseignement, de l'organisation du temps scolaire, de la coordination des activités éducatives et de la gestion des relations avec les parents et les collectivités. »</div>
+        </div>
+      </section>
+
+      <!-- RÉFÉRENTIEL MÉTIER -->
+      <section id="referentiel">
+        <div class="section-header">
+          <div class="icon">📋</div>
+          <h2>Référentiel Métier du Directeur d'École</h2>
+        </div>
+
+        <p>Le référentiel publié au BO n°3 du 17 janvier 2019 structure les missions autour de <strong>4 axes</strong> et <strong>15 compétences</strong>. En tant que FFDD, on attend de vous une maîtrise de ces 4 axes.</p>
+
+        <h3>🔷 Axe 1 : Piloter l'école</h3>
+        <ul>
+          <li><strong>1.1</strong> Élaborer et mettre en œuvre le projet d'école</li>
+          <li><strong>1.2</strong> Assurer la concertation et l'animation pédagogique</li>
+          <li><strong>1.3</strong> Organiser les conseils des maîtres et conseils de cycle</li>
+          <li><strong>1.4</strong> Mettre en œuvre le conseil d'école</li>
+          <li><strong>1.5</strong> Assurer le dialogue avec l'IEN</li>
+        </ul>
+
+        <h3>🔷 Axe 2 : Animer l'équipe pédagogique</h3>
+        <ul>
+          <li><strong>2.1</strong> Favoriser le travail d'équipe et la cohésion</li>
+          <li><strong>2.2</strong> Accompagner les enseignants débutants et stagiaires</li>
+          <li><strong>2.3</strong> Coordonner les projets pédagogiques</li>
+          <li><strong>2.4</strong> Organiser les formations (animations pédagogiques, formation continue)</li>
+        </ul>
+
+        <h3>🔷 Axe 3 : Gérer l'école</h3>
+        <ul>
+          <li><strong>3.1</strong> Gérer les inscriptions et les effectifs</li>
+          <li><strong>3.2</strong> Organiser le temps scolaire et les services</li>
+          <li><strong>3.3</strong> Assurer la sécurité des élèves et le plan de mise en sûreté (PPMS)</li>
+          <li><strong>3.4</strong> Gérer le budget et les relations avec la mairie</li>
+          <li><strong>3.5</strong> Gérer les ressources humaines (ATSEM, personnels communaux)</li>
+        </ul>
+
+        <h3>🔷 Axe 4 : Représenter l'institution</h3>
+        <ul>
+          <li><strong>4.1</strong> Représenter l'Éducation nationale auprès de la commune et des partenaires</li>
+          <li><strong>4.2</strong> Assurer la communication avec les parents d'élèves</li>
+          <li><strong>4.3</strong> Participer aux instances de la circonscription</li>
+          <li><strong>4.4</strong> Mettre en œuvre la laïcité et le respect des valeurs de la République</li>
+        </ul>
+
+        <div class="callout info">
+          <strong>💡 Pour le FFDD</strong>
+          Les axes 1 (pilotage) et 3 (gestion) sont les plus urgents à maîtriser lors d'une prise de poste en cours d'année. L'axe 2 (animation) se construit avec le temps. L'axe 4 (représentation) vient avec l'expérience.
+        </div>
+      </section>
+
+      <!-- MISSIONS -->
+      <section id="missions">
+        <div class="section-header">
+          <div class="icon">📝</div>
+          <h2>Missions & Attributions Détaillées</h2>
+        </div>
+
+        <h3>Les missions quotidiennes</h3>
+        <table>
+          <thead>
+            <tr><th>Domaine</th><th>Missions</th><th>Fréquence</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Pédagogie</strong></td><td>Animation des conseils des maîtres, suivi des programmes, coordination de cycle, PPRE, PPS, PAP</td><td>Quotidien / Hebdo</td></tr>
+            <tr><td><strong>Administratif</strong></td><td>Inscriptions, radiation, gestion des effectifs, certification des documents, statistiques (rentrée)</td><td>Quotidien / Saisonnier</td></tr>
+            <tr><td><strong>Relationnel</strong></td><td>Accueil des parents, relations mairie, relations IEN, partenaires (RASED, PMI, ASE, etc.)</td><td>Quotidien</td></tr>
+            <tr><td><strong>Sécurité</strong></td><td>PPMS, registre de sécurité, exercices incendie/attentat, gestion des crises</td><td>Annuel + urgence</td></tr>
+            <tr><td><strong>Financier</strong></td><td>Budget coopérative, commandes fournitures, subventions mairie, gestion des sorties</td><td>Mensuel / Ponctuel</td></tr>
+            <tr><td><strong>Ressources humaines</strong></td><td>ATSEM, personnel communal, stagiaires, remplaçants</td><td>Hebdo / Mensuel</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Les temps forts de l'année</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="date">🔵 Juin-Septembre</div>
+            <div class="title">🔄 Rentrée : inscriptions, répartition des services, pré-rentrée, conseil des maîtres de rentrée</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">🔵 Octobre</div>
+            <div class="title">📊 Conseil d'école n°1, élections des représentants de parents</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">🔵 Novembre-Décembre</div>
+            <div class="title">📝 Évaluations nationales (CP-CE1-CM2), conseils de cycle n°1</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">🔵 Janvier-Février</div>
+            <div class="title">📋 Conseil d'école n°2, préparation de la rentrée suivante (prévisions effectifs)</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">🔵 Mars-Avril</div>
+            <div class="title">🏫 Campagne d'inscriptions, conseils des maîtres, liaison CM2-6e</div>
+          </div>
+          <div class="timeline-item">
+            <div class="date">🔵 Mai-Juin</div>
+            <div class="title">✅ Conseil d'école n°3, bilan de l'année, préparation de la rentrée, passation</div>
+          </div>
+        </div>
+
+        <h3>Focus : les documents à connaître</h3>
+        <ul>
+          <li><strong>Projet d'école</strong> — feuille de route pédagogique sur 3-4 ans</li>
+          <li><strong>Règlement intérieur</strong> — approuvé par le conseil d'école</li>
+          <li><strong>Registre d'appel</strong> — quotidien (responsabilité pénale)</li>
+          <li><strong>Registre de sécurité</strong> — vérifications obligatoires</li>
+          <li><strong>PPMS</strong> — Plan Particulier de Mise en Sûreté</li>
+          <li><strong>PAI / PPS / PPRE / PAP</strong> — dispositifs d'accompagnement des élèves</li>
+          <li><strong>Convention de sortie scolaire</strong> — obligation administrative</li>
+        </ul>
+      </section>
+
+      <!-- GUIDE DU DIRECTEUR -->
+      <section id="guide">
+        <div class="section-header">
+          <div class="icon">📘</div>
+          <h2>Guide du Directeur d'École</h2>
+        </div>
+
+        <p>Le <strong>Guide du directeur d'école</strong> publié par le Ministère (Eduscol) est la ressource pratique n°1. Il existe en version PDF téléchargeable et détaille toutes les procédures concrètes.</p>
+
+        <div class="ref-card">
+          <div class="ref-title">📖 Guide du directeur d'école — Édition 2024</div>
+          <div class="ref-meta"><span class="tag tag-guide">Eduscol — Ressource officielle</span></div>
+          <div class="ref-desc">Document de référence complet : toutes les missions expliquées pas à pas, modèles de documents, procédures, textes de référence. Indispensable à avoir dans son bureau.</div>
+          <a class="ref-link" href="https://eduscol.education.fr/1155/guide-du-directeur-d-ecole" target="_blank">🔗 Voir sur Eduscol →</a>
+        </div>
+
+        <h3>Les chapitres du guide</h3>
+        <ol>
+          <li><strong>Organisation et fonctionnement de l'école</strong> — statut, conseils, instances</li>
+          <li><strong>La scolarité des élèves</strong> — inscriptions, radiation, obligations</li>
+          <li><strong>L'action pédagogique</strong> — projets, cycles, évaluations</li>
+          <li><strong>La vie de l'école</strong> — sécurité, santé, citoyenneté</li>
+          <li><strong>Les relations avec les partenaires</strong> — mairie, parents, associations</li>
+          <li><strong>L'administration et la gestion</strong> — budget, RH, locaux</li>
+          <li><strong>Annexes</strong> — modèles, textes, lexique</li>
+        </ol>
+
+        <div class="callout success">
+          <strong>📌 Astuce FFDD</strong>
+          Téléchargez et imprimez le guide dès maintenant. Même si vous ne l'ouvrez jamais avant la nomination, avoir ce document sous la main le jour J est le meilleur investissement.
+        </div>
+
+        <h3>Autres ressources Eduscol / CANOPÉ</h3>
+        <ul>
+          <li><strong>CANOPÉ</strong> — Formation « Être directeur d'école » (parcours magistère)</li>
+          <li><strong>Eduscol — Vade-mecum du directeur d'école</strong> (synthèse en 20 pages)</li>
+          <li><strong>Réseau CANOPÉ</strong> — Webinaires et conférences sur la fonction de direction</li>
+        </ul>
+      </section>
+
+      <!-- COMPÉTENCES -->
+      <section id="competences">
+        <div class="section-header">
+          <div class="icon">🧠</div>
+          <h2>Compétences Clés pour un FFDD</h2>
+        </div>
+
+        <p>Au-delà des textes, voici les <strong>compétences opérationnelles</strong> qui feront la différence lors de votre première semaine en tant que FFDD.</p>
+
+        <h3>1. Compétences juridiques et administratives</h3>
+        <ul>
+          <li>Connaître le cadre réglementaire de l'école (Code de l'éducation)</li>
+          <li>Maîtriser les procédures d'inscription, radiation, dérogation</li>
+          <li>Connaître le droit à l'image, la responsabilité civile/pénale</li>
+          <li>Savoir rédiger un compte-rendu de conseil d'école</li>
+          <li>Gérer les registres obligatoires (appel, sécurité, incidence)</li>
+        </ul>
+
+        <h3>2. Compétences en gestion des ressources humaines</h3>
+        <ul>
+          <li>Animer une équipe : conseils des maîtres, conseils de cycle</li>
+          <li>Gérer les conflits et médiations</li>
+          <li>Organiser le service des ATSEM et personnels communaux</li>
+          <li>Accompagner les enseignants débutants (T1, T2, stagiaires)</li>
+        </ul>
+
+        <h3>3. Compétences en pilotage pédagogique</h3>
+        <ul>
+          <li>Élaborer et piloter le projet d'école</li>
+          <li>Coordonner les évaluations nationales (CP, CE1, CM2)</li>
+          <li>Mettre en œuvre les PPRE, PAP, PPS</li>
+          <li>Organiser la liaison CM2-6e</li>
+        </ul>
+
+        <h3>4. Compétences en communication</h3>
+        <ul>
+          <li>Communiquer avec les parents (difficiles, séparés, mécontents)</li>
+          <li>Négocier avec la mairie (budget, locaux, personnels)</li>
+          <li>Travailler avec l'IEN de circonscription</li>
+          <li>Représenter l'école dans les instances</li>
+        </ul>
+
+        <h3>5. Compétences en gestion de crise</h3>
+        <ul>
+          <li>Savoir activer le PPMS</li>
+          <li>Gérer un accident ou une altercation</li>
+          <li>Réagir face à une menace ou une intrusion</li>
+          <li>Gérer une crise médiatique locale</li>
+        </ul>
+
+        <div class="pro-section">
+          <h4>📖 Les ouvrages de référence recommandés</h4>
+          <ul>
+            <li><strong>« Le métier de directeur d'école »</strong> — Jean-Pierre OBIN, ESF Éditeur</li>
+            <li><strong>« Être directeur d'école : missions, responsabilités, outils »</strong> — Christiane RICAUD, Hachette Éducation</li>
+            <li><strong>« La fonction de direction à l'école primaire »</strong> — Collectif, CANOPÉ Éditions</li>
+            <li><strong>« Guide du directeur d'école »</strong> — Berger-Levrault (édition annuelle)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- INDEMNITÉS -->
+      <section id="indemnites">
+        <div class="section-header">
+          <div class="icon">💰</div>
+          <h2>Indemnités & Régime Indemnitaire</h2>
+        </div>
+
+        <div class="callout info">
+          <strong>💶 Important</strong>
+          Le FFDD perçoit les <strong>mêmes indemnités</strong> qu'un directeur titulaire pour la durée de son intérim.
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Indemnité</th><th>Montant (brut annuel 2024)</th><th>Condition</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ISOE-R (Indemnité de Suivi et d'Orientation des Élèves — part responsable)</strong></td><td>~2 553 €</td><td>Tous directeurs (part fixe)</td></tr>
+            <tr><td><strong>ISOE-R (part modulable selon taille école)</strong></td><td>De ~600 € à ~3 200 €</td><td>Variable selon nombre de classes</td></tr>
+            <tr><td><strong>Décharge d'enseignement</strong></td><td>Jours de décharge selon taille</td><td>1 classe : 0,5 j/sem — 2-3 cl. : 1 j — 4-5 cl. : 2 j — 6+ : 3 j — 9+ : 4 j — 12+ : 5 j — 14+ : temps plein</td></tr>
+            <tr><td><strong>NBI (Nouvelle Bonification Indiciaire)</strong></td><td>10 à 30 points</td><td>Selon taille de l'école (REP/RREP majoré)</td></tr>
+            <tr><td><strong>Indemnité REP/REP+</strong></td><td>Majoration selon REP/REP+</td><td>Application REP+ pour Mayotte (selon zones)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout warning">
+          <strong>⚠️ À Mayotte</strong>
+          L'école La Rose est en <strong>REP+</strong>. Les indemnités REP+ s'appliquent. La prime REP+ pour un directeur est majorée. Consultez la circonscription pour le montant exact applicable.
+        </div>
+
+        <h3>Textes de référence sur les indemnités</h3>
+        <ul>
+          <li>Décret n° 2019-826 du 1er août 2019 (article 8 — régime indemnitaire)</li>
+          <li>Arrêté du 1er août 2019 fixant les montants de l'ISOE-R</li>
+          <li>Circulaire n° 2023-069 du 24 mai 2023 (revalorisation)</li>
+        </ul>
+      </section>
+
+      <!-- CIRCULAIRES DE RENTRÉE -->
+      <section id="circulaires">
+        <div class="section-header">
+          <div class="icon">🔄</div>
+          <h2>Circulaires de Rentrée & Actualités</h2>
+        </div>
+
+        <p>Chaque année, la <strong>circulaire de rentrée</strong> fixe les priorités pédagogiques nationales. Ces priorités impactent directement le projet d'école et le travail du directeur.</p>
+
+        <h3>Circulaires récentes à connaître</h3>
+
+        <div class="ref-card">
+          <div class="ref-title">Circulaire de rentrée 2024</div>
+          <div class="ref-meta"><span class="tag tag-bo">BOEN — Juillet 2024</span></div>
+          <div class="ref-desc">Priorités : maîtrise des savoirs fondamentaux (lire, écrire, compter), choc des savoirs (groupes de besoins en français/maths), école inclusive, lutte contre le harcèlement.</div>
+          <a class="ref-link" href="https://www.education.gouv.fr/bo/2024/Hebdo27" target="_blank">🔗 Voir sur education.gouv.fr →</a>
+        </div>
+
+        <div class="ref-card">
+          <div class="ref-title">Circulaire de rentrée 2025</div>
+          <div class="ref-meta"><span class="tag tag-bo">BOEN — 2025</span></div>
+          <div class="ref-desc">Actualisation des priorités. À consulter dès parution pour connaître les nouveaux axes.</div>
+          <a class="ref-link" href="https://www.education.gouv.fr/bo/" target="_blank">🔗 Voir le BOEN →</a>
+        </div>
+
+        <h3>Autres circulaires thématiques</h3>
+        <ul>
+          <li><strong>Circulaire école inclusive</strong> — n° 2019-088 du 5 juin 2019 (PPS, ULIS, accompagnement)</li>
+          <li><strong>Circulaire laïcité</strong> — n° 2022-092 du 23 juin 2022</li>
+          <li><strong>Circulaire lutte contre le harcèlement</strong> — programme pHARe</li>
+          <li><strong>Circulaire PPMS</strong> — n° 2015-205 du 5 novembre 2015</li>
+          <li><strong>Circulaire évaluations nationales</strong> — chaque année (CP, CE1, CM2, 6e)</li>
+        </ul>
+      </section>
+
+      <!-- SYNDICATS -->
+      <section id="syndicats">
+        <div class="section-header">
+          <div class="icon">🤝</div>
+          <h2>Ressources Syndicales & Associatives</h2>
+        </div>
+
+        <p>Les syndicats et associations produisent des guides pratiques, des fiches synthétiques et des conseils juridiques très utiles pour un FFDD.</p>
+
+        <table>
+          <thead>
+            <tr><th>Organisation</th><th>Ressources</th><th>Lien</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>SNUipp-FSU</strong></td><td>Guides, fiches statut, simulateurs, conseils juridiques</td><td><a href="https://www.snuipp.fr" target="_blank">snuipp.fr →</a></td></tr>
+            <tr><td><strong>SE-Unsa</strong></td><td>Guide du directeur, analyse des textes, formations</td><td><a href="https://www.se-unsa.org" target="_blank">se-unsa.org →</a></td></tr>
+            <tr><td><strong>SGEN-CFDT</strong></td><td>Fiches métiers, analyses juridiques, informations statutaires</td><td><a href="https://www.sgen-cfdt.fr" target="_blank">sgen-cfdt.fr →</a></td></tr>
+            <tr><td><strong>FSU (section Mayotte)</strong></td><td>Informations locales, contacts académiques</td><td>Contacter la circonscription</td></tr>
+            <tr><td><strong>AMAE (Association des Directeurs)</strong></td><td>Réseau professionnel, partage d'expériences, formations</td><td><a href="https://www.association-amae.fr" target="_blank">association-amae.fr →</a></td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout info">
+          <strong>💡 Conseil</strong>
+          Prenez contact dès maintenant avec le <strong>SNUipp 976 (Mayotte)</strong> ou le représentant local de la FSU. Ils connaissent les spécificités de l'académie et pourront vous conseiller sur le contexte local.
+        </div>
+      </section>
+
+      <!-- CHECKLIST -->
+      <section id="preparation">
+        <div class="section-header">
+          <div class="icon">✅</div>
+          <h2>Checklist de Préparation</h2>
+        </div>
+
+        <p>Voici les actions à mener dès maintenant pour être prêt le jour J.</p>
+
+        <h3>📚 Lecture et documentation</h3>
+        <ul class="checklist">
+          <li class="done">Lire le <strong>Référentiel métier</strong> (BO n°3, 17/01/2019)</li>
+          <li>Lire le <strong>Décret n° 2019-826</strong> (statut directeur)</li>
+          <li>Lire l'<strong>Arrêté du 1er août 2019</strong> (missions et décharges)</li>
+          <li>Lire la <strong>Circulaire n° 2019-122</strong> (mise en œuvre)</li>
+          <li>Télécharger et parcourir le <strong>Guide du directeur d'école</strong> (Eduscol)</li>
+          <li>Lire les <strong>articles D. 411-1 à D. 411-7</strong> du Code de l'éducation</li>
+          <li>Consulter la <strong>circulaire de rentrée</strong> de l'année en cours</li>
+          <li>Lire le <strong>règlement intérieur type</strong> de l'école</li>
+        </ul>
+
+        <h3>📋 Administratif et organisation</h3>
+        <ul class="checklist">
+          <li>Consulter l'<strong>organigramme de la circonscription</strong> (IEN, secrétariat, CPC, RASED)</li>
+          <li>Contacter le <strong>directeur sortant</strong> ou titulaire pour la passation</li>
+          <li>Récupérer les <strong>codes et identifiants</strong> (SIEN, ONDE, ARENA, i-Prof, Base élèves)</li>
+          <li>Vérifier l'accès aux <strong>applications</strong> : ONDE, SIECLE, RGPD, Éduscol</li>
+          <li>Faire un état des lieux des <strong>effectifs et des classes</strong></li>
+          <li>Vérifier le <strong>budget</strong> et les comptes de la coopérative</li>
+          <li>Vérifier les <strong>conventions</strong> en cours (sorties, intervenants)</li>
+        </ul>
+
+        <h3>🤝 Relations et ressources</h3>
+        <ul class="checklist">
+          <li>Prendre contact avec le <strong>référent syndical</strong> local</li>
+          <li>Échanger avec un <strong>directeur expérimenté</strong> de la circonscription</li>
+          <li>Participer à la <strong>réunion des directeurs</strong> de la circonscription</li>
+          <li>S'inscrire aux <strong>formations Magistère</strong> sur la direction d'école</li>
+          <li>Consulter le <strong>site de la circonscription</strong> IEN Bandraboua</li>
+        </ul>
+
+        <h3>🚨 Urgences le premier jour</h3>
+        <ul class="checklist">
+          <li>Vérifier le <strong>PPMS</strong> et les consignes de sécurité</li>
+          <li>Vérifier le <strong>registre d'appel</strong> et la transmission des absences</li>
+          <li>Vérifier les <strong>PAI / PPS</strong> des élèves à besoins spécifiques</li>
+          <li>Vérifier le <strong>calendrier scolaire</strong> et les horaires</li>
+          <li>Organiser le <strong>premier conseil des maîtres</strong></li>
+          <li>Préparer le <strong>conseil d'école</strong> si échéance proche</li>
+        </ul>
+      </section>
+
+      <!-- ACADÉMIE -->
+      <section id="academie">
+        <div class="section-header">
+          <div class="icon">🌍</div>
+          <h2>Spécificités de l'Académie de Mayotte</h2>
+        </div>
+
+        <div class="callout warning">
+          <strong>📍 Contexte local</strong>
+          Vous êtes à l'<strong>école La Rose, Handrema, Bandraboua</strong> (REP+). La circonscription est l'<strong>IEN Bandraboua — Mayotte Nord</strong>. Les spécificités mahoraises sont importantes à connaître.
+        </div>
+
+        <h3>Particularités de Mayotte</h3>
+        <ul>
+          <li><strong>Langues</strong> — Français langue seconde pour beaucoup d'élèves (vous avez la certification FLS)</li>
+          <li><strong>Effectifs chargés</strong> — classes parfois surchargées (jusqu'à 35-40 élèves)</li>
+          <li><strong>Réseau REP+</strong> — moyens renforcés, projets spécifiques, indemnités majorées</li>
+          <li><strong>Rotation des enseignants</strong> — turn-over important, équipes souvent renouvelées</li>
+          <li><strong>Relations mairie</strong> — communes parfois sous-équipées, importance du dialogue</li>
+          <li><strong>Absentéisme</strong> — suivi rigoureux des présences obligatoire</li>
+        </ul>
+
+        <h3>Contacts utiles (Mayotte)</h3>
+        <ul>
+          <li><strong>IEN Bandraboua</strong> — Circonscription Mayotte Nord</li>
+          <li><strong>DSDEN de Mayotte</strong> — Direction des Services Départementaux de l'Éducation Nationale</li>
+          <li><strong>Vice-rectorat de Mayotte</strong> — rectorat.ac-mayotte.fr</li>
+          <li><strong>CANOPÉ Mayotte</strong> — formation et ressources locales</li>
+          <li><strong>Mairie de Bandraboua</strong> — pour la gestion des locaux, ATSEM, cantine</li>
+        </ul>
+
+        <div class="ref-card">
+          <div class="ref-title">📎 Site du Vice-rectorat de Mayotte</div>
+          <div class="ref-meta"><span class="tag tag-outil">Académie</span></div>
+          <div class="ref-desc">Actualités, circulaires académiques, calendrier scolaire, contacts des circonscriptions.</div>
+          <a class="ref-link" href="https://www.ac-mayotte.fr" target="_blank">🔗 ac-mayotte.fr →</a>
+        </div>
+      </section>
+
+      <!-- LIENS UTILES -->
+      <section id="liens">
+        <div class="section-header">
+          <div class="icon">🔗</div>
+          <h2>Liens Utiles & Références</h2>
+        </div>
+
+        <h3>🔖 Plateformes officielles</h3>
+        <table>
+          <thead><tr><th>Ressource</th><th>Adresse</th><th>Utilité</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Bulletin Officiel de l'Éducation Nationale (BOEN)</td>
+              <td><a href="https://www.education.gouv.fr/bo/" target="_blank">education.gouv.fr/bo/</a></td>
+              <td>Textes officiels, circulaires, référentiels</td>
+            </tr>
+            <tr>
+              <td>Légifrance (Code de l'éducation)</td>
+              <td><a href="https://www.legifrance.gouv.fr/codes/id/LEGITEXT000006071191/" target="_blank">legifrance.gouv.fr</a></td>
+              <td>Textes de loi, décrets, jurisprudences</td>
+            </tr>
+            <tr>
+              <td>Eduscol — Guide du directeur</td>
+              <td><a href="https://eduscol.education.fr/1155/guide-du-directeur-d-ecole" target="_blank">eduscol.education.fr</a></td>
+              <td>Ressources pratiques et pédagogiques</td>
+            </tr>
+            <tr>
+              <td>Réseau CANOPÉ</td>
+              <td><a href="https://www.reseau-canope.fr" target="_blank">reseau-canope.fr</a></td>
+              <td>Formations, webinaires, ressources</td>
+            </tr>
+            <tr>
+              <td>Site du Vice-rectorat Mayotte</td>
+              <td><a href="https://www.ac-mayotte.fr" target="_blank">ac-mayotte.fr</a></td>
+              <td>Informations académiques locales</td>
+            </tr>
+            <tr>
+              <td>Service Public (Fonction publique)</td>
+              <td><a href="https://www.service-public.fr/particuliers/vosdroits/F31691" target="_blank">service-public.fr</a></td>
+              <td>Droits, carrière, indemnités</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>📱 Applications indispensables</h3>
+        <ul>
+          <li><strong>ONDE</strong> — Outil Numérique pour la Direction d'École (inscriptions, effectifs, remontées)</li>
+          <li><strong>SIECLE</strong> — Gestion des élèves et de la scolarité</li>
+          <li><strong>ARENA</strong> — Gestion des remplacements et des absences</li>
+          <li><strong>i-Prof</strong> — Suivi de carrière et formations</li>
+          <li><strong>Éduscol — Évaluations nationales</strong> — Passation et saisie</li>
+          <li><strong>Base élèves 1er degré</strong> — Gestion des inscriptions</li>
+        </ul>
+
+        <h3>📚 Bibliographie recommandée</h3>
+        <ul>
+          <li><strong>« Le guide du directeur d'école »</strong> — Berger-Levrault (édition actualisée chaque année)</li>
+          <li><strong>« Être directeur d'école : les clés pour réussir »</strong> — Alexandre LAURENT, ESF</li>
+          <li><strong>« La direction d'école : missions et responsabilités »</strong> — Jean-Michel ZAKHARTCHOUK, CANOPÉ</li>
+          <li><strong>« Droit de l'éducation »</strong> — Berger-Levrault (pour les aspects juridiques)</li>
+        </ul>
+      </section>
+
+      <!-- CONCLUSION -->
+      <section>
+        <div class="section-header">
+          <div class="icon">🎯</div>
+          <h2>En Résumé</h2>
+        </div>
+
+        <div class="callout success">
+          <strong>✅ Les 5 textes à avoir impérativement lus</strong>
+          1. Référentiel métier du directeur (BO n°3, 17/01/2019)<br>
+          2. Décret n° 2019-826 du 1er août 2019<br>
+          3. Arrêté du 1er août 2019 (organisation des missions)<br>
+          4. Circulaire n° 2019-122 du 4 septembre 2019<br>
+          5. Guide du directeur d'école (Eduscol)
+        </div>
+
+        <div class="callout info">
+          <strong>📌 Les 3 réflexes à avoir le jour J</strong>
+          1. <strong>Ne pas paniquer</strong> — vous avez les textes, le guide, et le réseau de la circonscription<br>
+          2. <strong>Demander la passation</strong> avec le directeur sortant (1 journée minimum)<br>
+          3. <strong>Contacter l'IEN</strong> — il est votre supérieur hiérarchique direct et votre premier soutien
+        </div>
+
+        <div class="callout warning">
+          <strong>🏁 Dernier conseil</strong>
+          Jacques, tu as déjà une <strong>licence de psychologie</strong>, une <strong>certification FLS</strong>, <strong>20+ ans d'expérience</strong> en REP/REP+ et tu es à La Rose (Handrema) depuis la rentrée. Tu connais le terrain mieux que quiconque. La fonction de direction, c'est avant tout du <strong>bon sens, de l'organisation et de la communication</strong>. Les textes, tu les liras au fur et à mesure. Le plus important, c'est d'être présent, à l'écoute et de savoir dire « je ne sais pas, je vais me renseigner ».
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>Guide préparé pour M. Jacques HASSANI MOUSTOIFA — École La Rose, Handrema, Bandraboua (Mayotte)</p>
+  <p>Dernière mise à jour : juillet 2026 • Sources : BOEN, Légifrance, Eduscol, Code de l'éducation</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;opacity:0.6;">Ce site compile les textes officiels à titre informatif. Seuls les textes publiés au BOEN et au JORF font foi.</p>
+</footer>
+
+<script>
+  // Highlight current section in sidebar on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.sidebar nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`.sidebar nav a[href="#${entry.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-80px 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
