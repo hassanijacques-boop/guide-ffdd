@@ -62,6 +62,18 @@
     font-size: 0.85rem;
     margin-bottom: 1rem;
   }
+  .hero .badge-new {
+    display: inline-block;
+    background: #ff4444;
+    color: #fff;
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
   /* LAYOUT */
   .container {
     max-width: 1100px;
@@ -351,7 +363,7 @@
 <body>
 
 <div class="hero">
-  <div class="badge">📋 Guide de Préparation</div>
+  <div class="badge">📋 Guide de Préparation <span class="badge-new">RÉFÉRENTIEL 2026</span></div>
   <h1>Faisant Fonction de Directeur d'École</h1>
   <p>Tous les textes officiels, circulaires, référentiels et ressources pour être prêt à l'éventualité d'une nomination en tant que FFDD</p>
 </div>
@@ -365,8 +377,9 @@
       <nav>
         <a href="#intro">Introduction</a>
         <a href="#statut" class="sub">Qu'est-ce qu'un FFDD ?</a>
+        <a href="#referentiel-2026">📢 RÉFÉRENTIEL 2026 (NOUVEAU)</a>
         <a href="#textes">Textes Officiels</a>
-        <a href="#referentiel" class="sub">Référentiel Métier</a>
+        <a href="#referentiel" class="sub">Ancien Référentiel 2019</a>
         <a href="#missions" class="sub">Missions & Attributions</a>
         <a href="#guide">Guide du Directeur d'École</a>
         <a href="#competences">Compétences Clés</a>
@@ -431,6 +444,140 @@
         </ul>
       </section>
 
+      <!-- NOUVEAU RÉFÉRENTIEL 2026 -->
+      <section id="referentiel-2026">
+        <div class="section-header">
+          <div class="icon">🆕</div>
+          <h2>Nouveau Référentiel Métier 2026 <span class="tag" style="background:#ff4444;color:#fff;font-size:0.7rem;vertical-align:middle;margin-left:0.5rem;">BO 21/05/2026</span></h2>
+        </div>
+
+        <div class="callout warning">
+          <strong>🚨 MISE À JOUR MAJEURE — 21 MAI 2026</strong>
+          Le BO n°21 du 21 mai 2026 publie un <strong>nouveau référentiel métier</strong> qui remplace celui de 2019. La structure change complètement : on passe de 4 axes/15 compétences à <strong>4 grands domaines de responsabilité</strong>. Voici le texte intégral.
+        </div>
+
+        <div class="ref-card" style="border-color:#ff4444;background:#fff5f5;">
+          <div class="ref-title">📄 Référentiel métier des directrices et directeurs d'école — 2026</div>
+          <div class="ref-meta"><span class="tag tag-bo" style="background:#ff4444;color:#fff;">BO n°21 du 21 mai 2026</span> <span class="tag tag-loi">MENE2612947C</span></div>
+          <div class="ref-desc">Nouveau référentiel qui remplace celui du BO n°3 du 17 janvier 2019. Structure en 4 parties : pilotage pédagogique, fonctionnement de l'école, cohérence des temps de l'enfant, protection de l'enfance. Signé Caroline Pascal, DGESCO.</div>
+          <a class="ref-link" href="https://www.education.gouv.fr/bo/2026/Hebdo21/MENE2612947C" target="_blank">🔗 Voir le texte officiel →</a>
+        </div>
+
+        <h3 style="margin-top:1.5rem;">🏛️ I. Pilotage pédagogique</h3>
+
+        <h4>A. Identifier et définir les priorités pédagogiques de l'école</h4>
+        <ul>
+          <li>Mobiliser l'équipe sur la nécessité d'un <strong>climat scolaire serein et sécurisant</strong></li>
+          <li>Conduire le <strong>projet d'école</strong> avec l'équipe pédagogique et l'IEN</li>
+          <li>Fonder le projet sur l'<strong>analyse des résultats</strong> aux évaluations nationales</li>
+          <li>Animer le <strong>conseil des maîtres</strong> (au moins 1 fois/trimestre) : ordre du jour précis, relevé de conclusions</li>
+          <li><strong>Arrêter la répartition des classes</strong> entre professeurs (au titre de l'autorité fonctionnelle)</li>
+          <li>Veiller aux classes dédoublées GS/CP/CE1 en éducation prioritaire</li>
+          <li>Assurer le <strong>conseil de cycle</strong> : progressions cohérentes, objectifs ambitieux</li>
+          <li>Dialoguer avec l'IEN sur les besoins de formation</li>
+        </ul>
+
+        <h4>B. Mobiliser les personnels et les ressources au service de la réussite des élèves</h4>
+        <ul>
+          <li>Diffuser les instructions officielles et programmes</li>
+          <li>Utiliser les <strong>outils numériques</strong> LSU, LPI pour le suivi des parcours</li>
+          <li>Coordonner l'équipe : enseignants, ATSEM, AESH, remplaçants</li>
+          <li>Assurer l'<strong>intégration des nouveaux personnels</strong></li>
+          <li>Identifier les situations particulières (handicap, difficultés) et mobiliser les dispositifs (RASED, pôle ressource, Erseh)</li>
+          <li>Assurer la <strong>qualité des relations avec les familles</strong> et les représentants des parents</li>
+          <li>Réunir l'<strong>équipe éducative</strong> dès que nécessaire</li>
+        </ul>
+
+        <h3>🏛️ II. Responsabilités relatives au fonctionnement de l'école</h3>
+        <p><em>Dans le cadre de l'<strong>autorité fonctionnelle</strong> conférée au directeur.</em></p>
+
+        <h4>A. Admission, accueil et surveillance des élèves</h4>
+        <ul>
+          <li>Admission sur certificat d'inscription du maire</li>
+          <li>Aménagement des emplois du temps (petite section maternelle, sur validation IEN)</li>
+          <li>Certificat de radiation et transmission LSU</li>
+          <li>Organiser l'<strong>accueil et la surveillance</strong></li>
+          <li>Contrôle de l'<strong>assiduité</strong> : 4 demi-journées d'absence non justifiées → équipe éducative sans attendre</li>
+          <li>Échanges avec la commune pour les transitions temps scolaire/périscolaire</li>
+        </ul>
+
+        <h4>B. Présidence du conseil d'école</h4>
+        <ul>
+          <li>Ordre du jour, communication aux membres</li>
+          <li>Présentation des résultats aux évaluations nationales</li>
+          <li>Procès-verbal transmis à l'IEN et au maire, affiché</li>
+          <li>Organisation des <strong>élections des parents d'élèves</strong></li>
+        </ul>
+
+        <h4>C. Règlement intérieur de l'école</h4>
+        <ul>
+          <li>Élaboration, vote au conseil d'école, diffusion, affichage</li>
+          <li>Faire respecter le règlement, notamment le <strong>principe de laïcité</strong></li>
+          <li><strong>Nouveau : suspension provisoire</strong> d'un élève (max 5 jours) si comportement répété fait peser un risque caractérisé (décret 16 août 2023)</li>
+          <li>Signalement via application <strong>Faits établissement</strong> pour faits graves</li>
+        </ul>
+
+        <h4>D. Répartition des moyens et organisation des services</h4>
+        <ul>
+          <li>Répartir les moyens d'enseignement après avis du conseil des maîtres</li>
+          <li>Répartir les élèves <strong>en classes et groupes</strong>, arrêter le service des enseignants</li>
+          <li>Organiser les <strong>108 heures</strong> (projet d'école)</li>
+          <li>Autorité sur <strong>tous les personnels intervenant</strong> dans l'école pendant le temps scolaire</li>
+          <li>Évaluation des assistants d'éducation (délégation IEN)</li>
+          <li>Informer l'IEN et les familles en cas d'absence d'un enseignant</li>
+        </ul>
+
+        <h4>E. Sécurité de l'école</h4>
+        <ul>
+          <li>Sécurité incendie : exercices obligatoires, registre de sécurité</li>
+          <li>PPMS (Plan Particulier de Mise en Sûreté) : diffusion, exercices, information familles</li>
+          <li>Coordination avec le périscolaire</li>
+          <li><strong>Mesures d'urgence</strong> : le directeur peut prendre lui-même les mesures nécessaires avant d'en référer à l'IEN et au maire</li>
+        </ul>
+
+        <h3>🏛️ III. Cohérence des différents temps de l'enfant</h3>
+
+        <h4>A. Relation avec les familles</h4>
+        <ul>
+          <li>Expliciter le sens des enseignements, le règlement et le projet d'école</li>
+          <li>S'assurer que les <strong>circuits d'information</strong> sont clairs et accessibles</li>
+          <li>Expliquer les stratégies d'accompagnement contre la difficulté scolaire</li>
+        </ul>
+
+        <h4>B. Alliance éducative avec les collectivités et associations</h4>
+        <ul>
+          <li>Représenter l'institution auprès des collectivités territoriales</li>
+          <li>Œuvrer à la <strong>coopération entre acteurs éducatifs</strong> (temps scolaire et hors temps scolaire)</li>
+          <li>Piloter les politiques publiques en lien avec les collectivités</li>
+          <li>Développer les parcours éducatifs en lien avec les dispositifs du territoire</li>
+        </ul>
+
+        <h3>🏛️ IV. Participation à la protection de l'enfance</h3>
+        <p><em>Nouveau chapitre à part entière dans le référentiel.</em></p>
+        <ul>
+          <li>Contribuer au <strong>repérage des situations d'enfants en danger</strong></li>
+          <li>Organiser la réflexion partagée au sein de l'équipe</li>
+          <li>Afficher le numéro du service national d'appel (119)</li>
+          <li>Transmettre les <strong>informations préoccupantes</strong> au président du conseil départemental</li>
+          <li>Assurer les <strong>signalements</strong> selon le protocole départemental</li>
+          <li>Préserver la qualité des relations avec les familles concernées</li>
+        </ul>
+
+        <div class="callout info">
+          <strong>📌 Principales évolutions par rapport au référentiel 2019</strong>
+          <ul style="margin-top:0.3rem;">
+            <li><strong>Structure simplifiée</strong> : 4 grands domaines au lieu de 4 axes/15 compétences</li>
+            <li><strong>Autorité fonctionnelle renforcée</strong> : le directeur arrête la répartition des classes</li>
+            <li><strong>Protection de l'enfance</strong> devient un chapitre dédié</li>
+            <li><strong>Cohérence des temps</strong> de l'enfant (scolaire/périscolaire) explicitée</li>
+            <li><strong>Suspension provisoire</strong> d'élève intégrée (décret 2023)</li>
+            <li><strong>Appli Faits établissement</strong> mentionnée pour les signalements</li>
+            <li><strong>108 heures</strong> : pleine responsabilité du directeur sur la programmation</li>
+            <li>Centré sur le <strong>bien-être des élèves</strong> et le <strong>climat scolaire</strong></li>
+          </ul>
+        </div>
+      </section>
+
       <!-- TEXTES OFFICIELS -->
       <section id="textes">
         <div class="section-header">
@@ -441,10 +588,17 @@
 
         <h3>🔴 Priorité 1 — Textes Fondamentaux (à lire impérativement)</h3>
 
+        <div class="ref-card" style="border-color:#ff4444;background:#fff5f5;">
+          <div class="ref-title">⭐ 1. RÉFÉRENTIEL MÉTIER 2026 — NOUVEAU</div>
+          <div class="ref-meta"><span class="tag tag-bo" style="background:#ff4444;color:#fff;">BO n°21 — 21 mai 2026</span> <span class="tag tag-guide">Référentiel — MENE2612947C</span></div>
+          <div class="ref-desc"><strong>TEXTE N°1 À LIRE.</strong> Nouveau référentiel métier des directrices et directeurs d'école. Remplace celui de 2019. Structure en 4 domaines : pilotage pédagogique, fonctionnement de l'école, cohérence des temps de l'enfant, protection de l'enfance.</div>
+          <a class="ref-link" href="https://www.education.gouv.fr/bo/2026/Hebdo21/MENE2612947C" target="_blank">🔗 Voir sur education.gouv.fr →</a>
+        </div>
+
         <div class="ref-card">
-          <div class="ref-title">1. Référentiel métier du directeur d'école</div>
-          <div class="ref-meta"><span class="tag tag-bo">BO n°3 — 17 janvier 2019</span> <span class="tag tag-guide">Référentiel</span></div>
-          <div class="ref-desc">Texte fondateur qui définit les 4 axes du métier : piloter l'école, animer l'équipe pédagogique, gérer l'école, représenter l'institution. Structure toutes les missions.</div>
+          <div class="ref-title">2. Référentiel métier du directeur d'école (version 2019 — remplacée)</div>
+          <div class="ref-meta"><span class="tag tag-bo">BO n°3 — 17 janvier 2019</span> <span class="tag tag-guide">Historique</span></div>
+          <div class="ref-desc"><strong>À titre historique.</strong> Texte fondateur qui définissait les 4 axes du métier. Remplacé par le nouveau référentiel 2026. Encore utile pour comprendre l'évolution du métier.</div>
           <a class="ref-link" href="https://www.education.gouv.fr/bo/19/Hebdo3/MENE1900766C.htm" target="_blank">🔗 Voir sur education.gouv.fr →</a>
         </div>
 
@@ -525,10 +679,15 @@
       <section id="referentiel">
         <div class="section-header">
           <div class="icon">📋</div>
-          <h2>Référentiel Métier du Directeur d'École</h2>
+          <h2>Ancien Référentiel Métier (2019) — Remplacé</h2>
         </div>
 
-        <p>Le référentiel publié au BO n°3 du 17 janvier 2019 structure les missions autour de <strong>4 axes</strong> et <strong>15 compétences</strong>. En tant que FFDD, on attend de vous une maîtrise de ces 4 axes.</p>
+        <div class="callout warning">
+          <strong>⚠️ Ce référentiel a été remplacé</strong>
+          Le référentiel 2019 est remplacé par le <strong><a href="#referentiel-2026" style="color:var(--primary);">nouveau référentiel 2026</a></strong> (BO n°21 du 21 mai 2026). Cette section est conservée à titre historique pour comprendre l'évolution du métier.
+        </div>
+
+        <p>L'ancien référentiel (BO n°3 du 17 janvier 2019) structurait les missions autour de <strong>4 axes</strong> et <strong>15 compétences</strong> :</p>
 
         <h3>🔷 Axe 1 : Piloter l'école</h3>
         <ul>
@@ -997,7 +1156,7 @@
 
         <div class="callout success">
           <strong>✅ Les 5 textes à avoir impérativement lus</strong>
-          1. Référentiel métier du directeur (BO n°3, 17/01/2019)<br>
+          1. ⭐ <strong>Nouveau référentiel métier 2026</strong> (BO n°21, 21/05/2026) — <span style="color:#ff4444;">PRIORITAIRE</span><br>
           2. Décret n° 2019-826 du 1er août 2019<br>
           3. Arrêté du 1er août 2019 (organisation des missions)<br>
           4. Circulaire n° 2019-122 du 4 septembre 2019<br>
@@ -1023,7 +1182,7 @@
 
 <footer class="footer">
   <p>Guide préparé pour M. Jacques HASSANI MOUSTOIFA — École La Rose, Handrema, Bandraboua (Mayotte)</p>
-  <p>Dernière mise à jour : juillet 2026 • Sources : BOEN, Légifrance, Eduscol, Code de l'éducation</p>
+  <p>Dernière mise à jour : juillet 2026 • Intègre le <strong>nouveau référentiel métier 2026</strong> (BO n°21 du 21/05/2026) • Sources : BOEN, Légifrance, Eduscol, Code de l'éducation</p>
   <p style="margin-top:0.5rem;font-size:0.75rem;opacity:0.6;">Ce site compile les textes officiels à titre informatif. Seuls les textes publiés au BOEN et au JORF font foi.</p>
 </footer>
 
