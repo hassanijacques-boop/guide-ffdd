@@ -373,6 +373,10 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
+      <div style="position:relative;margin-bottom:0.8rem;">
+        <input type="text" id="searchBar" placeholder="🔍 Rechercher dans le site..." style="width:100%;padding:0.5rem 0.8rem;border:2px solid var(--border);border-radius:8px;font-size:0.85rem;outline:none;transition:border-color 0.2s;">
+        <div id="searchResults" style="position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:0 0 8px 8px;max-height:300px;overflow-y:auto;display:none;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.1);"></div>
+      </div>
       <h3>📑 Sommaire</h3>
       <nav>
         <a href="#intro">Introduction</a>
@@ -3190,6 +3194,87 @@
       });
       li.insertBefore(cb, li.firstChild);
     });
+  });
+
+  // === BARRE DE RECHERCHE ===
+  const searchBar = document.getElementById('searchBar');
+  const resultsDiv = document.getElementById('searchResults');
+  let searchTimeout;
+
+  // Build search index from all sections
+  const secElements = document.querySelectorAll('section[id]');
+  const searchIndex = [];
+  secElements.forEach(sec => {
+    const id = sec.id;
+    const title = sec.querySelector('h2')?.textContent || '';
+    const text = sec.textContent || '';
+    // Get all headings for better matching
+    const headings = [];
+    sec.querySelectorAll('h3, h4').forEach(h => headings.push(h.textContent));
+    searchIndex.push({ id, title, text, headings });
+  });
+
+  searchBar.addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    const q = this.value.trim().toLowerCase();
+    if (q.length < 2) { resultsDiv.style.display = 'none'; return; }
+
+    searchTimeout = setTimeout(() => {
+      const matches = [];
+      searchIndex.forEach((item, idx) => {
+        // Score: title match = 3, heading match = 2, body match = 1
+        let score = 0;
+        if (item.title.toLowerCase().includes(q)) score += 3;
+        item.headings.forEach(h => { if (h.toLowerCase().includes(q)) score += 2; });
+        // Count occurrences in body
+        const bodyLower = item.text.toLowerCase();
+        let pos = -1, count = 0;
+        while ((pos = bodyLower.indexOf(q, pos + 1)) !== -1) count++;
+        if (count > 0) score += Math.min(count, 3);
+        if (score > 0) matches.push({ id: item.id, title: item.title, score, count });
+      });
+
+      matches.sort((a, b) => b.score - a.score || b.count - a.count);
+      const top = matches.slice(0, 8);
+
+      if (top.length === 0) {
+        resultsDiv.innerHTML = '<div style="padding:0.5rem 0.8rem;color:#999;font-size:0.8rem;">Aucun résultat</div>';
+        resultsDiv.style.display = 'block';
+        return;
+      }
+
+      resultsDiv.innerHTML = top.map(m => {
+        const shortTitle = m.title.length > 50 ? m.title.slice(0, 50) + '…' : m.title;
+        return '<div style="padding:0.4rem 0.8rem;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:0.82rem;transition:background 0.15s;" '
+          + 'onmouseover="this.style.background=\'#f0f7ff\'" onmouseout="this.style.background=\'#fff\'" '
+          + 'onclick="document.getElementById(\'' + m.id + '\').scrollIntoView({behavior:\'smooth\',block:\'start\'});'
+          + 'document.getElementById(\'searchBar\').value=\'\';document.getElementById(\'searchResults\').style.display=\'none\';'
+          + 'document.getElementById(\'' + m.id + '\').style.background=\'#fffde7\';'
+          + 'setTimeout(function(){document.getElementById(\'' + m.id + '\').style.background=\'\'},2000);"'
+          + '>' + '🔗 <strong>' + shortTitle + '</strong> <span style="color:#999;font-size:0.7rem;">(' + m.count + ' résultats)</span></div>';
+      }).join('');
+      // Add "see all results" if many
+      if (matches.length > 8) {
+        resultsDiv.innerHTML += '<div style="padding:0.3rem 0.8rem;color:#999;font-size:0.72rem;text-align:center;">+' + (matches.length - 8) + ' autres résultats — tapez plus précisément</div>';
+      }
+      resultsDiv.style.display = 'block';
+    }, 200);
+  });
+
+  // Close results on click outside
+  document.addEventListener('click', function(e) {
+    if (!searchBar.contains(e.target) && !resultsDiv.contains(e.target)) {
+      resultsDiv.style.display = 'none';
+    }
+  });
+
+  // Focus on search with Ctrl+F or / 
+  document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+      e.preventDefault();
+      searchBar.focus();
+      searchBar.select();
+    }
   });
 </script>
 
